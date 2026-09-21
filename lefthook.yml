@@ -1,0 +1,17 @@
+pre-commit:
+  piped: true
+  jobs:
+    - name: oxlint
+      run: pnpm exec oxlint --fix "{staged_files}"
+      stage_fixed: true
+    - name: eslint
+      run: pnpm exec eslint --fix --cache "{staged_files}"
+      stage_fixed: true
+    - name: format
+      run: pnpm exec oxfmt --no-error-on-unmatched-pattern "{staged_files}"
+      stage_fixed: true
+
+commit-msg:
+  jobs:
+    - name: commitlint
+      run: pnpm exec commitlint --edit "{1}"
