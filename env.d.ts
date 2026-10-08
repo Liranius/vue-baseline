@@ -1,2 +1,8 @@
 /// <reference types="vite/client" />
-const VITE_APP_TITLE: string;
+interface ViteTypeOptions {
+  strictImportMetaEnv: unknown;
+}
+
+interface ImportMetaEnv {
+  readonly VITE_APP_TITLE: string;
+}

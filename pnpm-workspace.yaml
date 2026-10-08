@@ -3,4 +3,4 @@ strictPeerDependencies: true
 saveExact: true
 allowBuilds:
   esbuild: true
-  lefthook: true
+  lefthook: false
