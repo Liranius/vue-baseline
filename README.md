@@ -20,17 +20,17 @@ Node 版本见 [.node-version](.node-version)，pnpm 版本与完整脚本见 [p
 
 ## 常用命令
 
-| 命令              | 用途                                 |
-| ----------------- | ------------------------------------ |
-| `pnpm dev`        | 启动开发服务                         |
-| `pnpm build`      | 类型检查与生产构建，两项均成功才通过 |
-| `pnpm build-only` | 仅构建                               |
-| `pnpm type-check` | 仅检查类型                           |
-| `pnpm preview`    | 预览已有构建                         |
-| `pnpm test:unit`  | 单次运行单元测试                     |
-| `pnpm test:watch` | 开发时监听变更并重跑单元测试         |
-| `pnpm lint`       | 执行 Oxlint、ESLint 并自动修复       |
-| `pnpm format`     | 格式化文件                           |
+| 命令              | 用途                                      |
+| ----------------- | ----------------------------------------- |
+| `pnpm dev`        | 启动开发服务                              |
+| `pnpm build`      | 类型检查与生产构建，两项均成功才通过      |
+| `pnpm build-only` | 仅构建                                    |
+| `pnpm type-check` | 仅检查类型                                |
+| `pnpm preview`    | 预览已有构建                              |
+| `pnpm test:unit`  | 单次运行单元测试                          |
+| `pnpm test:watch` | 开发时监听变更并重跑单元测试              |
+| `pnpm lint`       | 执行 Oxlint、ESLint、Stylelint 并自动修复 |
+| `pnpm format`     | 格式化文件                                |
 
 ## 浏览器测试
 
