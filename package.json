@@ -18,7 +18,9 @@
     "lint:eslint": "eslint . --fix --cache",
     "lint:style": "stylelint \"**/*.{css,vue}\" --fix",
     "format": "oxfmt",
-    "hooks:install": "lefthook install"
+    "hooks:install": "lefthook install",
+    "ci:format": "oxfmt --check",
+    "ci:lint": "oxlint . && eslint . && stylelint \"**/*.{css,vue}\""
   },
   "dependencies": {
     "pinia": "4.0.3",

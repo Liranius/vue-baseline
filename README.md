@@ -17,6 +17,8 @@ pnpm dev
 
 Node 版本见 [.node-version](.node-version)，pnpm 版本与完整脚本见 [package.json](package.json)。
 编辑器扩展推荐见 [.vscode/extensions.json](.vscode/extensions.json)。
+公共默认环境变量由 [.env](.env) 提供，本地开发、构建和 CI 共用。
+如需个人覆盖，可参考 [.env.example](.env.example) 创建不提交的 `.env.local`；无需复制即可使用默认配置。
 
 ## 常用命令
 
@@ -31,6 +33,8 @@ Node 版本见 [.node-version](.node-version)，pnpm 版本与完整脚本见 [p
 | `pnpm test:watch` | 开发时监听变更并重跑单元测试              |
 | `pnpm lint`       | 执行 Oxlint、ESLint、Stylelint 并自动修复 |
 | `pnpm format`     | 格式化文件                                |
+| `pnpm ci:format`  | 只读检查格式                              |
+| `pnpm ci:lint`    | 只读执行 Oxlint、ESLint、Stylelint        |
 
 ## 浏览器测试
 
@@ -48,6 +52,13 @@ pnpm test:e2e
 pnpm exec playwright install chromium firefox webkit
 pnpm test:e2e:all
 ```
+
+## CI
+
+[GitHub Actions](.github/workflows/ci.yml) 在 PR 更新、`master` 推送和手动触发时运行：
+冻结安装、只读格式检查、只读 Lint、单元测试，以及 Chromium 冒烟。
+冒烟入口已包含类型检查和生产构建，CI 不重复执行；Lint 的 warning 默认不阻断。
+浏览器失败报告保留 7 天，仓库分支保护可将 `Quality` 设为必需状态检查。
 
 ## 提交
 
