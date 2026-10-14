@@ -55,7 +55,7 @@ pnpm test:e2e:all
 
 ## CI
 
-[GitHub Actions](.github/workflows/ci.yml) 在 PR 更新、`master` 推送和手动触发时运行：
+[GitHub Actions](.github/workflows/ci.yml) 在 PR 更新、`main` 推送和手动触发时运行：
 冻结安装、只读格式检查、只读 Lint、单元测试，以及 Chromium 冒烟。
 冒烟入口已包含类型检查和生产构建，CI 不重复执行；Lint 的 warning 默认不阻断。
 浏览器失败报告保留 7 天，仓库分支保护可将 `Quality` 设为必需状态检查。
