@@ -57,13 +57,41 @@ pnpm test:e2e:all
 
 [GitHub Actions](.github/workflows/ci.yml) 在 PR 更新、`main` 推送和手动触发时运行：
 冻结安装、只读格式检查、只读 Lint、单元测试，以及 Chromium 冒烟。
+PR 额外检查目标分支尚未包含的全部非 merge 提交信息；检查对象为事件中的 base / head SHA，不检查 PR 标题。
+PR 创建、追加或重写提交、重新打开、编辑标题或目标分支时都会重新运行。
 冒烟入口已包含类型检查和生产构建，CI 不重复执行；Lint 的 warning 默认不阻断。
-浏览器失败报告保留 7 天，仓库分支保护可将 `Quality` 设为必需状态检查。
+浏览器失败报告保留 7 天。`main` 的必需检查及实际验收状态见下文；使用本基准创建新仓库时需单独配置平台规则。
 
-## 提交
+## 提交与合并
 
 提交前运行 `pnpm lint`、`pnpm test:unit` 和 `pnpm build`；
 页面或构建配置变更后补充浏览器测试。
 
 `lint`、`format` 和提交钩子会改写文件；提交钩子还会重新暂存修复结果，请审查差异。
 提交信息采用 Conventional Commits，例如 `fix: correct page title`。
+
+远端仅允许 rebase merge。单一完整变更在本地 squash 为一个提交；多个值得保留的逻辑步骤整理为几个提交，再通过 PR 合入。
+正式审查前将零散修补归并到对应提交；每个保留提交应包含对应的必要测试并保持可构建。
+本地与 CI 共用 commitlint 配置，不自动忽略 `fixup!`、`squash!` 或版本号提交；这些信息需整理为 Conventional Commits。
+rebase merge 保留提交边界和信息，但会生成新的 SHA。已推送分支如需改写历史，先与协作者协调，再使用 `git push --force-with-lease`。
+PR 的审查粒度与 commit 的历史粒度分别管理，可独立审查和合入的部分优先拆为多个 PR。
+
+## 维护与验收
+
+配置维护、依赖升级和例外审查由仓库维护者负责；复制为新项目后由该项目维护者接管。
+每季度复查依赖支持状态、已知风险及配置例外，安全公告或兼容性问题出现时及时评估。
+
+依赖按实际需要升级：安全修复、必要的兼容性适配、支持周期将结束、可验证的显著性能收益或项目所需功能。
+选择满足需求且维护成本可控的版本，不以发布新版本作为升级理由；主版本升级单独提交 PR，说明破坏性变更和适配范围。
+升级时同步相关版本声明与锁文件，执行完整 CI，并验证受影响的接口、行为及失败路径；PR 记录升级理由与验证结果。
+
+当前能力与验收状态：
+
+- 本地工具链和 Chromium 冒烟已接通；远端完整 CI、失败 PR 拦截、修复后合并及 `main` 推送触发已于 2026-10-14 验证，见 [验收 PR #1](https://github.com/Liranius/vue-baseline/pull/1)。验收时 `main` 要求 `Quality` 通过且与目标分支同步，管理员同样受约束。
+- 提交信息由本地 commit-msg hook 和 CI 的 `Quality` 检查，覆盖 PR 将保留的全部新增提交。2026-10-15 已验证非末尾违规提交会使 `Quality` 失败，见 [失败记录](https://github.com/Liranius/vue-baseline/actions/runs/38722391975)；整理后的完整 CI 结果见 [PR #5](https://github.com/Liranius/vue-baseline/pull/5)。仓库已核验为仅允许 rebase merge。
+- `Quality` 当前由执行检查的 job 提供，尚无显式拒绝跳过的汇总门禁；补齐后验收取消、意外跳过、缺失检查、旧提交结果及修复恢复的合并行为。
+- [Dependabot](.github/dependabot.yml) 每周提出 GitHub Actions 更新候选，由维护者按上述条件审查；应用及开发依赖暂不自动创建版本更新 PR，不采用自动合并。
+- 依赖漏洞和秘密扫描未接入当前 CI；平台内建能力的启用范围待核查。
+- 架构边界、Knip、SAST、体积 / 性能 / 可访问性预算暂未启用；出现实际需求时评估接入。多浏览器可本地执行，CI 仅运行 Chromium。
+
+配置例外应在相关配置注释或 PR 中记录规则与范围、原因、责任人和复查条件；依赖或规则升级时确认保留、收窄或移除。
