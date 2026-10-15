@@ -2,6 +2,7 @@ name: CI
 
 on:
   pull_request:
+    types: [opened, synchronize, reopened, edited]
   push:
     branches: [main]
   workflow_dispatch:
@@ -24,6 +25,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
+          fetch-depth: 0
           persist-credentials: false
 
       - name: Setup Node
@@ -39,6 +41,19 @@ jobs:
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
+
+      - name: Check PR commit messages
+        if: ${{ github.event_name == 'pull_request' }}
+        shell: bash
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+          HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+        run: |
+          commits=$(git rev-list --reverse --no-merges "$BASE_SHA..$HEAD_SHA")
+          test -n "$commits"
+          while IFS= read -r commit; do
+            git show --no-patch --format=%B "$commit" | pnpm exec commitlint --verbose
+          done <<< "$commits"
 
       - name: Check formatting
         run: pnpm run ci:format
