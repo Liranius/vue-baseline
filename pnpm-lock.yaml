@@ -233,6 +233,9 @@ importers:
       jiti:
         specifier: 2.7.0
         version: 2.7.0
+      js-yaml:
+        specifier: 4.3.2
+        version: 4.3.2
       jsdom:
         specifier: 30.1.0
         version: 30.1.0

@@ -20,7 +20,12 @@
     "format": "oxfmt",
     "hooks:install": "lefthook install",
     "ci:format": "oxfmt --check",
-    "ci:lint": "oxlint . && eslint . && stylelint \"**/*.{css,vue}\""
+    "ci:lint": "oxlint . && eslint . && stylelint \"**/*.{css,vue}\"",
+    "knowledge:setup": "node scripts/knowledge.mjs setup",
+    "knowledge:doctor": "node scripts/knowledge.mjs doctor",
+    "knowledge:cli": "node scripts/knowledge.mjs cli",
+    "knowledge:check": "node scripts/knowledge-review.mjs check",
+    "knowledge:find": "node scripts/knowledge-review.mjs find"
   },
   "dependencies": {
     "pinia": "4.0.3",
@@ -47,6 +52,7 @@
     "eslint-plugin-vue": "10.11.0",
     "globals": "17.12.0",
     "jiti": "2.7.0",
+    "js-yaml": "4.3.2",
     "jsdom": "30.1.0",
     "lefthook": "2.1.14",
     "npm-run-all2": "9.0.3",

@@ -68,6 +68,19 @@ skill 来自 [Dammyjay93/interface-design](https://github.com/Dammyjay93/interfa
 
 项目适配维护在 AGENTS.md 和 system.md，不修改上游 skill；Oxfmt 仅排除该第三方目录以保持原文件，项目自有文档仍正常检查。升级时复查此例外、审查指令与资源变化并更新版本记录，并复验未初始化设计、保存与新会话读取三条路径。
 
+## 项目知识
+
+本项目可选接入 Basic Memory，用于伴随开发保存和读取知识。安装、worktree 绑定与启动核查见 [项目知识接入](docs/project-knowledge.md)。先安装 uv，再执行：
+
+```sh
+pnpm knowledge:setup
+pnpm knowledge:doctor
+```
+
+开发中的知识收录和维护由项目技能衔接；可用 `pnpm knowledge:check` 查看受变更影响的笔记，用 `pnpm knowledge:find 关键词` 做本地检索回退。范围与使用方式见上述接入说明。
+
+知识文件随当前 worktree 的 Git 管理，运行时和索引保留在用户缓存。使用新 Codex 会话加载项目 MCP 与官方技能，并审查、信任项目 hooks；传统开发和 CI 不需要安装该工具。
+
 ## CI
 
 [GitHub Actions](.github/workflows/ci.yml) 在 PR 更新、`main` 推送和手动触发时运行：
