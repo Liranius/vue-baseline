@@ -2,6 +2,10 @@
 
 Vue 3 + Vite + TypeScript 应用基准，包含 Vue Router、Pinia、组件测试和浏览器冒烟测试。
 
+## 许可证
+
+本项目自有代码采用 [MIT](LICENSE)；仓库收录的第三方技能和 schema 遵循各自许可证，范围、来源与修改记录见 [第三方材料说明](THIRD_PARTY_NOTICES.md)。
+
 ## 初始化
 
 先安装 fnm 并完成 shell 初始化，然后在仓库根目录执行：

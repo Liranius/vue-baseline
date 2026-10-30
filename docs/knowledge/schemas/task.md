@@ -23,6 +23,14 @@ settings:
 permalink: vue-baseline/schemas/task
 ---
 
+<!--
+SPDX-License-Identifier: AGPL-3.0-or-later
+Source: Basic Machines / Basic Memory, https://github.com/basicmachines-co/basic-memory/blob/1d0e09b6f4876c3f339c30e8dbfcf66e59e2c356/plugins/codex/schemas/task.md
+Modified for Liranius/vue-baseline on 2026-10-29: added the project permalink and normalized formatting.
+2026-10-30: added this provenance and modification notice; schema semantics and original prose are unchanged.
+License: LICENSE in this directory. See ../../../THIRD_PARTY_NOTICES.md for scope.
+-->
+
 # Task
 
 A **Task** is work-in-progress tracked as a note, so it survives context
