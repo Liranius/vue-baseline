@@ -87,7 +87,7 @@ pnpm knowledge:find 超时 重试 --limit 5
 
 采用 Codex 项目级 MCP 和 hooks 配置，并由启动器调用官方 `basic-memory mcp` 与 `basic-memory hook`。上游全局插件的默认命令没有本项目的 worktree 绑定，因此这里没有执行用户级 `bm install codex`，也没有修改上游插件源码。
 
-五个官方技能 `bm-orient`、`bm-decide`、`bm-writing`、`bm-remember`、`bm-checkpoint` 来自 [Basic Memory 固定提交](https://github.com/basicmachines-co/basic-memory/tree/1d0e09b6f4876c3f339c30e8dbfcf66e59e2c356/plugins/codex/skills)，保留原文件及各目录中的 MIT 许可证。Oxfmt 只对这五个第三方目录增加例外；项目自身的脚本、配置和文档仍正常检查。schema 基于同版本官方模板，作为项目可维护的笔记格式。
+五个官方技能 `bm-orient`、`bm-decide`、`bm-writing`、`bm-remember`、`bm-checkpoint` 来自 [Basic Memory 固定提交](https://github.com/basicmachines-co/basic-memory/tree/1d0e09b6f4876c3f339c30e8dbfcf66e59e2c356/plugins/codex/skills)，保留原文件及各目录中的上游许可证原文（上游声明为 `AGPL-3.0-or-later`）。Oxfmt 只对这五个第三方目录增加例外；项目自身的脚本、配置和文档仍正常检查。schema 基于同版本官方模板，作为项目可维护的笔记格式；其许可证、来源及项目修改记录见 [第三方材料说明](../THIRD_PARTY_NOTICES.md)。
 
 接入日期 2026-10-29，验收工具版本为 uv 0.13.6、Basic Memory 0.24.1、Python 3.12。Basic Memory 的包版本固定，传递依赖由安装时解析；升级应作为单独工程变更，审查上游技能及运行时变化并复验绑定、失败路径、MCP 和 hooks。
 
