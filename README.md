@@ -22,7 +22,7 @@ pnpm dev
 Node 版本见 [.node-version](.node-version)，pnpm 版本与完整脚本见 [package.json](package.json)。
 编辑器扩展推荐见 [.vscode/extensions.json](.vscode/extensions.json)。
 公共默认环境变量由 [.env](.env) 提供，本地开发、构建和 CI 共用。
-如需个人覆盖，可参考 [.env.example](.env.example) 创建不提交的 `.env.local`；无需复制即可使用默认配置。
+如需个人覆盖，可参考 [.env.example](.env.example) 创建不提交的 `.env.local`；无需复制即可使用默认配置。`VITE_APP_TITLE` 用于浏览器标签页标题，默认值为 `Vue baseline`；`VITE_*` 会进入客户端产物，只能用于公开配置。
 
 ## 常用命令
 
@@ -92,7 +92,7 @@ pnpm knowledge:doctor
 PR 额外检查目标分支尚未包含的全部非 merge 提交信息；检查对象为事件中的 base / head SHA，不检查 PR 标题。
 PR 创建、追加或重写提交、重新打开、编辑标题或目标分支时都会重新运行。
 冒烟入口已包含类型检查和生产构建，CI 不重复执行；Lint 的 warning 默认不阻断。
-浏览器失败报告保留 7 天。`main` 的必需检查及实际验收状态见下文；使用本基准创建新仓库时需单独配置平台规则。
+浏览器失败报告保留 7 天；使用本基准创建新仓库时需单独配置平台规则。
 
 ## 提交与合并
 
